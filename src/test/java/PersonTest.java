@@ -62,7 +62,7 @@ class PersonTest {
     }
 
     @Test
-    void getGrandChildren() {
+    void grandChildrenShouldBeReturned() {
         //arrange
         Person granddad = new Person("Cor", "Snor", 'M', 75);
         Person dad = new Person("Bert", "Snor", 'M', 50);
@@ -76,6 +76,54 @@ class PersonTest {
 
         //assert
         assertEquals(2, granddad.getGrandChildren().size());
+
+    }
+
+    @Test
+    void everyPetOfEveryGrandChildShouldBeReturned() {
+        //arrange
+        Person granddad = new Person("Cor", "Snor", 'M', 75);
+        Person dad = new Person("Bert", "Snor", 'M', 50);
+        Person son = new Person("Jan", "Snor", 'M', 25);
+        Person daughter = new Person("Bep", "Snor", 'F', 23);
+        Pet dog = new Pet("Rover", 2, "dog");
+        Pet cat = new Pet("Pluis", 7, "cat");
+        Pet goldfish = new Pet("Visstick", 3, "goldfish");
+
+        //act
+        granddad.addChild(dad);
+        dad.addChild(son);
+        dad.addChild(daughter);
+        son.addPet(dog);
+        daughter.addPet(cat);
+        daughter.addPet(goldfish);
+
+        //assert
+        assertEquals(3, granddad.getPetsOfGrandChildren().size());
+
+    }
+
+    @Test
+    void everyNieceShouldBeReturned() {
+        //arrange
+        Person guy = new Person("Jan", "Kort", 'M', 32);
+        Person sister = new Person("Jantien", "Kort", 'F', 30);
+        Person niece1 = new Person("Corrie", "Lang", 'F', 5);
+        Person nephew1 = new Person("Roderick", "Lang", 'M', 3);
+        Person brother = new Person("Klaas", "Kort", 'M', 33);
+        Person niece2 = new Person("Truus", "Kort",'F', 3);
+        Person niece3 = new Person("Miep", "Kort", 'F', 1);
+
+        //act
+        guy.addSibling(sister);
+        guy.addSibling(brother);
+        sister.addChild(niece1);
+        sister.addChild(nephew1);
+        brother.addChild(niece2);
+        brother.addChild(niece3);
+
+        //assert
+        assertEquals(3, guy.getNieces().size());
 
     }
 }

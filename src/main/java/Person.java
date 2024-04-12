@@ -46,7 +46,7 @@ public class Person {
     }
 
     public List<Person> getGrandChildren() {
-        List<Person> grandChildren = new ArrayList<Person>();
+        List<Person> grandChildren = new ArrayList<>();
         List<Person> children = getChildren();
 
         for (Person child : children) {
@@ -59,6 +59,45 @@ public class Person {
 //        }
 
         return grandChildren;
+    }
+
+    public List<Pet> getPetsOfGrandChildren() {
+        List<Person> grandChildren = getGrandChildren();
+        List<Pet> petsOfGrandChildren = new ArrayList<Pet>();
+
+        for (Person grandchild : grandChildren) {
+            petsOfGrandChildren.addAll(grandchild.getPets());
+        }
+
+        return petsOfGrandChildren;
+    }
+
+    public List<Person> getNieces() {
+        List<Person> nieces = new ArrayList<>();
+        List<Person> siblings = getSiblings();
+
+        for (Person sibling : siblings) {
+            List<Person> niblings = sibling.getChildren();
+
+            for (Person nibling : niblings) {
+                if (nibling.getSex() == 'F') {
+                    nieces.add(nibling);
+                }
+            }
+        }
+
+//        Duplicate code to help me better understand foreach loops:
+//        for (int i = 0; i < siblings.size(); i++) {
+//            List<Person> niblings = siblings.get(i).getChildren();
+//
+//            for (int j = 0; j < niblings.size(); j++) {
+//                if (niblings.get(j).getSex() == 'F') {
+//                    nieces.add(niblings.get(j));
+//                }
+//            }
+//        }
+
+        return nieces;
     }
 
     public String getName() {
