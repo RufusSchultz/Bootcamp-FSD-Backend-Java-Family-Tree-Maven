@@ -126,4 +126,18 @@ class PersonTest {
         assertEquals(3, guy.getNieces().size());
 
     }
+
+    @Test
+    void shouldNotBeSingleAnymore() {
+        //arrange
+        Person harry = new Person("Harry","Redhead",'M',40);
+        Person megan = new Person("Megan", "Marvel", 'F', 39);
+
+        //act
+        harry.addPartner(megan);
+
+        //assert
+        assertEquals(megan, harry.getPartner());
+
+    }
 }
