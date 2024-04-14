@@ -15,15 +15,15 @@ class PersonTest {
         child.addParents(dad, mom);
 
         //assert
-        assertEquals(dad, child.getFather());
-        assertEquals(mom, child.getMother());
+        assertEquals("Kyle", child.getFather().getName());
+        assertEquals("Sarah", child.getMother().getName());
     }
 
     @Test
     void personShouldHaveChildAdded() {
         //arrange
         Person parent = new Person("Ma", "Flodder", 'F', 44);
-        Person child = new Person("Kees", "Flodder", 'F',22);
+        Person child = new Person("Kees", "Flodder", 'F', 22);
 
         //act
         parent.addChild(child);
@@ -111,7 +111,7 @@ class PersonTest {
         Person niece1 = new Person("Corrie", "Lang", 'F', 5);
         Person nephew1 = new Person("Roderick", "Lang", 'M', 3);
         Person brother = new Person("Klaas", "Kort", 'M', 33);
-        Person niece2 = new Person("Truus", "Kort",'F', 3);
+        Person niece2 = new Person("Truus", "Kort", 'F', 3);
         Person niece3 = new Person("Miep", "Kort", 'F', 1);
 
         //act
@@ -130,14 +130,41 @@ class PersonTest {
     @Test
     void shouldNotBeSingleAnymore() {
         //arrange
-        Person harry = new Person("Harry","Redhead",'M',40);
+        Person harry = new Person("Harry", "Redhead", 'M', 40);
         Person megan = new Person("Megan", "Marvel", 'F', 39);
 
         //act
         harry.addPartner(megan);
 
         //assert
-        assertEquals(megan, harry.getPartner());
+        assertEquals("Megan", harry.getPartner().getName());
 
+    }
+
+    @Test
+    void ratioMalesToFemalesInChildrenShouldBeReturned() {
+        //arrange
+        Person mom = new Person("Linda", "DePinda", 'F', 66);
+        Person daughter1 = new Person("Lies", "Boer", 'F', 44);
+        Person daughter2 = new Person("Clarice", "DePinda", 'F', 30);
+        Person daughter3 = new Person("AnneLies", "DePinda", 'F', 29);
+        Person daughter4 = new Person("Tugba", "DePinda", 'F', 26);
+        Person son1 = new Person("Kwik", "DePinda", 'M', 42);
+        Person son2 = new Person("Kwek", "DePinda", 'M', 40);
+        Person son3 = new Person("Kwak", "DePinda", 'M', 38);
+
+
+        //act
+        mom.addChild(daughter1);
+        mom.addChild(daughter2);
+        mom.addChild(daughter3);
+        mom.addChild(daughter4);
+        mom.addChild(son1);
+        mom.addChild(son2);
+        mom.addChild(son3);
+
+
+        //assert
+        assertEquals(0.75, mom.malesToFemalesRatioInChildren());
     }
 }

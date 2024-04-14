@@ -73,10 +73,6 @@ public class Person {
         return petsOfGrandChildren;
     }
 
-    public void addPartner(Person partner) {
-        setPartner(partner);
-    }
-
     public List<Person> getNieces() {
         List<Person> nieces = new ArrayList<>();
         List<Person> siblings = getSiblings();
@@ -103,6 +99,23 @@ public class Person {
 //        }
 
         return nieces;
+    }
+
+    public void addPartner(Person partner) {
+        setPartner(partner);
+    }
+
+    public double malesToFemalesRatioInChildren() {
+        double males = 0;
+        double females = 0;
+        for (int i = 0; i < children.size(); i++) {
+            if (children.get(i).getSex() == 'M') {
+                males++;
+            } else {
+                females++;
+            }
+        }
+        return males / females;
     }
 
     public String getName() {
